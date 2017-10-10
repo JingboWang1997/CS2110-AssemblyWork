@@ -1,4 +1,4 @@
-;;===============================
+;;==============================
 ;; Name: Jingbo Wang
 ;;===============================
 ;; Write a program to add an element at a certain index in an array.

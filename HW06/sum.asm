@@ -3,7 +3,7 @@
 ;;===============================
 ;; Write a program sums the elements in an array
 ;; Note 1) Store the sum in the label SUM once the program has terminated. 
-;;		2) If SUM is not initially  zero, increment SUM by the sum of the array.
+;;	2) If SUM is not initially  zero, increment SUM by the sum of the array.
 ;;      3) The array's length is stored in the label LENGTH
 ;;      4) The address of the array's first element is stored in the label ARRAY
 
