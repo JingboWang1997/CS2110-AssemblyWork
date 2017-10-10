@@ -1,0 +1,124 @@
+<test-suite>
+    <test-case>
+        <name>sum(sum=0, length=0, [])</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-value>
+                <address>LENGTH</address>
+                <value>0</value>
+            </test-value>
+            <test-value>
+                <address>SUM</address>
+                <value>0</value>
+            </test-value>
+        </input>
+        <output>
+            <test-value points="5">
+                <address>SUM</address>
+                <value>0</value>
+            </test-value>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(sum=1, length=0, [])</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-value>
+                <address>LENGTH</address>
+                <value>0</value>
+            </test-value>
+            <test-value>
+                <address>SUM</address>
+                <value>1</value>
+            </test-value>
+        </input>
+        <output>
+            <test-value points="5">
+                <address>SUM</address>
+                <value>1</value>
+            </test-value>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(sum=0, length=1, [1])</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-array>
+                <address>ARRAY</address>
+                <value>1</value>
+            </test-array>
+            <test-value>
+                <address>LENGTH</address>
+                <value>1</value>
+            </test-value>
+            <test-value>
+                <address>SUM</address>
+                <value>0</value>
+            </test-value>
+        </input>
+        <output>
+            <test-value points="5">
+                <address>SUM</address>
+                <value>1</value>
+            </test-value>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(sum=0, length=2, [1,2])</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-array>
+                <address>ARRAY</address>
+                <value>1,2</value>
+            </test-array>
+            <test-value>
+                <address>LENGTH</address>
+                <value>2</value>
+            </test-value>
+            <test-value>
+                <address>SUM</address>
+                <value>0</value>
+            </test-value>
+        </input>
+        <output>
+            <test-value points="5">
+                <address>SUM</address>
+                <value>3</value>
+            </test-value>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(sum=0, length=15, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-array>
+                <address>ARRAY</address>
+                <value>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</value>
+            </test-array>
+            <test-value>
+                <address>LENGTH</address>
+                <value>15</value>
+            </test-value>
+            <test-value>
+                <address>SUM</address>
+                <value>0</value>
+            </test-value>
+        </input>
+        <output>
+            <test-value points="5">
+                <address>SUM</address>
+                <value>120</value>
+            </test-value>
+        </output>
+    </test-case>
+</test-suite>
