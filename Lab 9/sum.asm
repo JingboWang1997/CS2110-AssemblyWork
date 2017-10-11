@@ -1,5 +1,5 @@
 ;===========================
-; Name: YOUR NAME HERE
+; Name: Jingbo Wang
 ;===========================
 
 ;;Problem
@@ -43,10 +43,16 @@
 
 
 .orig x3000
-
-	; Your code here!
-
-
+	LEA R0, HELLO
+	PUTS ;print out the string first
+	LD R0, X ;put X in R0
+	LD R1, Y ;put Y in R1
+	ADD R0, R0, R1 ;put the sum in R0
+	ADD R0, R0, #15
+	ADD R0, R0, #15
+	ADD R0, R0, #15
+	ADD R0, R0, #3
+	OUT
 	HALT
 HELLO	.stringz "The sum is: "
 X	.fill 2
