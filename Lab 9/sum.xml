@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<test-suite>    
+    <test-case>
+        <name>sum(2,3) = 5</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-value><address>X</address><value>2</value></test-value>
+            <test-value><address>Y</address><value>3</value></test-value>
+        </input>
+        <output>
+            <test-stdout points = "25"><value>The sum is: 5</value></test-stdout>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(0,8) = 8</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-value><address>X</address><value>0</value></test-value>
+            <test-value><address>Y</address><value>8</value></test-value>
+        </input>
+        <output>
+            <test-stdout points = "25"><value>The sum is: 8</value></test-stdout>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(5,4) = 9</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-value><address>X</address><value>5</value></test-value>
+            <test-value><address>Y</address><value>4</value></test-value>
+        </input>
+        <output>
+            <test-stdout points = "25"><value>The sum is: 9</value></test-stdout>
+        </output>
+    </test-case>
+    <test-case>
+        <name>sum(603,-599) = 4</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-value><address>X</address><value>603</value></test-value>
+            <test-value><address>Y</address><value>-599</value></test-value>
+        </input>
+        <output>
+            <test-stdout points = "25"><value>The sum is: 4</value></test-stdout>
+        </output>
+    </test-case>
+</test-suite>

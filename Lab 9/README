@@ -1,0 +1,55 @@
+======================================================================
+CS2110                         Lab #09                       Fall 2017
+======================================================================
+
+(This lab is collaborative, so feel free to work with friends or TAs.)
+
+Objective: To get comfortable with our Linux environment, and to 
+           practice using the basic assembly instructions (such as 
+           LEA, LD, LDR, LDI, ST, STR, STI, AND, ADD, BR).
+
+You can find an appendix of basic assembly instructions by going to:
+   T-Square> CS-2110 > Resources > Assembly Resources > PattPatelAppA.pdf
+     
+Focus on the program design process:
+   1) Start with Pseudo-code
+   2) Decide on a register-usage scheme
+   3) Translate your psuedo-code into assembly one block at a time
+   4) Test each block
+   5) Debug
+   6) Repeat steps 3-5 until your entire program is complete
+
+================
+Your Assignment:
+================
+
+We have provided you with two skeleton assembly file called "sumtorial.asm" and "sum.asm".
+
+Included with the installation of complx is a program called lc3test, which
+uses a set of test values defined in an XML file to test your LC3 code. To get
+credit for this lab, you must implement the code in the provided template, then
+use the provided XML test to see if your code is correct. 
+
+Edit this file and turn in the following:
+
+    1) First you will write an assembly program that adds two numbers and prints
+    out the result. See more details in the sum.asm file. After writing and running
+    your code in complx you can check your work by running:
+
+    lctest sum.xml sum.asm
+
+   2) Write an assembly program called "sumtorial.asm" that calculates the sumtorial of a given number.
+
+      The "sumtorial" of a given number is very like the factorial of that number
+         except that instead of multiplying you will add. 
+      Factorial(n) = n * (n-1) * (n-2) * ... * 2 * 1
+      Sumtorial(n) = n + (n-1) + (n-2) + (n-3) + ... + 2 + 1 
+
+ Check that your code is correct by running:
+        lctest sumtorial.xml sumtorial.asm
+
+===========
+Submission:
+===========
+
+When you finish show a TA all your tests passing
