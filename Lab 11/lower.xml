@@ -1,0 +1,88 @@
+<test-suite>
+	<!-- Full testing of all code including the code to call the trap-->
+	<test-case>
+		<name>full e2e test HERE IS SOME INPUT.</name>
+		<true-traps>1</true-traps>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-stdin><value>HERE IS SOME INPUT\n</value></test-stdin>
+		</input>
+		<output>
+			<test-stdout><value>here is some input</value></test-stdout>
+			<test-register><register>R0</register><value>1</value></test-register>
+			<test-register><register>R1</register><value>2</value></test-register>
+			<test-register><register>R2</register><value>3</value></test-register>
+			<test-register><register>R3</register><value>4</value></test-register>
+			<test-register><register>R4</register><value>5</value></test-register>
+			<test-register><register>R5</register><value>6</value></test-register>
+			<test-register><register>R6</register><value>7</value></test-register>
+		</output>
+	</test-case>
+	<!-- Preferred method of testing traps, just test the trap handler code -->
+	<test-case>
+		<name>trap handler: HERE IS SOME INPUT.</name>
+		<true-traps>0</true-traps>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-pc><value>x5000</value></test-pc>
+			<test-register><register>R7</register><value>x6000</value></test-register>
+			<test-value><address>x6000</address><value>xf025</value></test-value>
+			<test-stdin><value>HERE IS SOME INPUT\n</value></test-stdin>
+			<test-register><register>R0</register><value>xf000</value></test-register>
+			<test-register><register>R1</register><value>xcafe</value></test-register>
+			<test-register><register>R2</register><value>89</value></test-register>
+			<test-register><register>R3</register><value>x1002</value></test-register>
+			<test-register><register>R4</register><value>x4004</value></test-register>
+			<test-register><register>R5</register><value>9001</value></test-register>
+			<test-register><register>R6</register><value>777</value></test-register>
+		</input>
+		<output>
+			<test-stdout><value>here is some input</value></test-stdout>
+			<test-pc><value>x6000</value></test-pc>
+			<test-register><register>R0</register><value>xf000</value></test-register>
+			<test-register><register>R1</register><value>xcafe</value></test-register>
+			<test-register><register>R2</register><value>89</value></test-register>
+			<test-register><register>R3</register><value>x1002</value></test-register>
+			<test-register><register>R4</register><value>x4004</value></test-register>
+			<test-register><register>R5</register><value>9001</value></test-register>
+			<test-register><register>R6</register><value>777</value></test-register>
+
+
+		</output>
+	</test-case>
+	<test-case>
+		<name>trap handler: A QUIck Sock ENtered Outisde the Room!</name>
+		<true-traps>0</true-traps>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-pc><value>x5000</value></test-pc>
+			<test-register><register>R7</register><value>x6000</value></test-register>
+			<test-value><address>x6000</address><value>xf025</value></test-value>
+			<test-stdin><value>A QUIck Sock ENtered Outisde the Room!\n</value></test-stdin>
+			<test-register><register>R0</register><value>xf000</value></test-register>
+			<test-register><register>R1</register><value>xcafe</value></test-register>
+			<test-register><register>R2</register><value>89</value></test-register>
+			<test-register><register>R3</register><value>x1002</value></test-register>
+			<test-register><register>R4</register><value>x4004</value></test-register>
+			<test-register><register>R5</register><value>9001</value></test-register>
+			<test-register><register>R6</register><value>777</value></test-register>
+		</input>
+		<output>
+			<test-stdout><value>a quick sock entered outisde the room!</value></test-stdout>
+			<test-pc><value>x6000</value></test-pc>
+			<test-register><register>R0</register><value>xf000</value></test-register>
+			<test-register><register>R1</register><value>xcafe</value></test-register>
+			<test-register><register>R2</register><value>89</value></test-register>
+			<test-register><register>R3</register><value>x1002</value></test-register>
+			<test-register><register>R4</register><value>x4004</value></test-register>
+			<test-register><register>R5</register><value>9001</value></test-register>
+			<test-register><register>R6</register><value>777</value></test-register>
+		</output>
+	</test-case>
+</test-suite>
