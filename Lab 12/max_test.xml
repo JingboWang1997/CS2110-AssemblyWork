@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<test-suite>
+	<!-- MAX tests -->
+	<test-case> 
+		<name>Max(-10,10) == 10</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-subr>
+				<name>MAX</name>
+				<stack>xF000</stack>
+				<r7>x5000</r7>
+				<r5>xCAFE</r5>
+				<params>-10, 10</params>
+			</test-subr>
+		</input>
+		<output>
+			<test-subr>
+				<answer>10</answer>
+				<points>
+					<answer>1</answer>
+					<params>1</params>
+					<r7>1</r7>
+					<r6>1</r6>
+					<r5>1</r5>
+				</points>
+				<deductions-per-mistake>1</deductions-per-mistake>
+			</test-subr>
+		</output>
+	</test-case>
+	<test-case> 
+		<name>Max(10,10) == 10</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-subr>
+				<name>MAX</name>
+				<stack>xF000</stack>
+				<r7>x5000</r7>
+				<r5>xCAFE</r5>
+				<params>-10, 10</params>
+			</test-subr>
+		</input>
+		<output>
+			<test-subr>
+				<answer>10</answer>
+				<points>
+					<answer>1</answer>
+					<params>1</params>
+					<r7>1</r7>
+					<r6>1</r6>
+					<r5>1</r5>
+				</points>
+				<deductions-per-mistake>1</deductions-per-mistake>
+			</test-subr>
+		</output>
+	</test-case>
+	<test-case> 
+		<name>Max(10,-10) == 10</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-subr>
+				<name>MAX</name>
+				<stack>xF000</stack>
+				<r7>x5000</r7>
+				<r5>xCAFE</r5>
+				<params>-10, 10</params>
+			</test-subr>
+		</input>
+		<output>
+			<test-subr>
+				<answer>10</answer>
+				<points>
+					<answer>1</answer>
+					<params>1</params>
+					<r7>1</r7>
+					<r6>1</r6>
+					<r5>1</r5>
+				</points>
+				<deductions-per-mistake>1</deductions-per-mistake>
+			</test-subr>
+		</output>
+	</test-case>
+	<test-case> 
+		<name>Max(0,40) == 40</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-subr>
+				<name>MAX</name>
+				<stack>xF000</stack>
+				<r7>x5000</r7>
+				<r5>xCAFE</r5>
+				<params>0, 40</params>
+			</test-subr>
+		</input>
+		<output>
+			<test-subr>
+				<answer>40</answer>
+				<points>
+					<answer>1</answer>
+					<params>1</params>
+					<r7>1</r7>
+					<r6>1</r6>
+					<r5>1</r5>
+				</points>
+				<deductions-per-mistake>1</deductions-per-mistake>
+			</test-subr>
+		</output>
+	</test-case>
+	<test-case> 
+		<name>Max(-1,3000) == 3000</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-subr>
+				<name>MAX</name>
+				<stack>xF000</stack>
+				<r7>x5000</r7>
+				<r5>xCAFE</r5>
+				<params>-1, 3000</params>
+			</test-subr>
+		</input>
+		<output>
+			<test-subr>
+				<answer>3000</answer>
+				<points>
+					<answer>1</answer>
+					<params>1</params>
+					<r7>1</r7>
+					<r6>1</r6>
+					<r5>1</r5>
+				</points>
+				<deductions-per-mistake>1</deductions-per-mistake>
+			</test-subr>
+		</output>
+	</test-case>
+</test-suite>

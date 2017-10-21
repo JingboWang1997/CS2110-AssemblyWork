@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<test-suite>
+	<!-- GetMax tests -->
+	<test-case>
+		<name>Max("123,456\n") == 456</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-stdin><value>123,456\n</value></test-stdin>
+		</input>
+		<output>
+			<test-value><address>ANSWER</address><value>456</value></test-value>
+		</output>
+	</test-case>
+	<test-case>
+		<name>Max("5,9999\n") == 9999</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-stdin><value>5,9999\n</value></test-stdin>
+		</input>
+		<output>
+			<test-value><address>ANSWER</address><value>9999</value></test-value>
+		</output>
+	</test-case>
+	<test-case>
+		<name>Max("0,5\n") == 5</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-stdin><value>0,5\n</value></test-stdin>
+		</input>
+		<output>
+			<test-value><address>ANSWER</address><value>5</value></test-value>
+		</output>
+	</test-case>
+	<test-case>
+		<name>Max("00002,003\n") == 3</name>
+		<has-max-executions>1</has-max-executions>
+		<max-executions>1000000</max-executions>
+		<randomize>1</randomize>
+		<input>
+			<test-stdin><value>00002,003\n</value></test-stdin>
+		</input>
+		<output>
+			<test-value><address>ANSWER</address><value>3</value></test-value>
+		</output>
+	</test-case>
+</test-suite>
