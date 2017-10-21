@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-suite>
+    <test-case>
+        <name>leftshift(xBEEF, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>LEFTSHIFT</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xBEEF, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>xBEEF</answer>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>leftshift(xBEEF, 16)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>LEFTSHIFT</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xBEEF, 16</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>0</answer>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>leftshift(0, 3)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>LEFTSHIFT</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>0, 3</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>0</answer>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>leftshift(7, 3)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>LEFTSHIFT</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>7, 3</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>56</answer>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>leftshift(x3021, 1)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>LEFTSHIFT</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x3021, 1</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x6042</answer>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+
+
+
+
+
+
+
+    <test-case>
+        <name>clear(7, 2)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>CLEAR</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>7, 2</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>3</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 2</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>clear(x00F0, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>CLEAR</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x00F0, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x00F0</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>clear(xF00E, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>CLEAR</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xF00E, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>xF00E</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>clear(xEFEE, 8)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>CLEAR</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xEFEE, 8</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>xEEEE</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 8</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>clear(x8031, 15)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>CLEAR</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x8031, 15</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x0031</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 15</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+
+
+
+
+
+    <test-case>
+        <name>set(x8EEE, 7)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>SET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x8EEE, 7</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x8EEE</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 7</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>set(1, 15)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>SET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>1, 15</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x8001</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 15</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>set(x432E, 6)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>SET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x432E, 6</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x436E</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 6</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>set(x000F, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>SET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x000F, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x000F</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>set(8, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>SET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>8, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>9</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+
+
+
+
+
+    <test-case>
+        <name>isset(8, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>ISSET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>8, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>0</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>isset(x000F, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>ISSET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x000F, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>1</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>isset(xAAAA, 5)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>ISSET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xAAAA, 5</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>1</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 5</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>isset(xFF00, 15)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>ISSET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xFF00, 15</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>1</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 15</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>isset(x1558, 2)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>ISSET</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x1558, 2</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>0</answer>
+                <calls>
+                    <call><name>LEFTSHIFT</name><params>1, 2</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+
+
+
+
+
+    <test-case>
+        <name>toggle(xE000, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>TOGGLE</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xE000, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>xE001</answer>
+                <calls>
+                    <call><name>ISSET</name><params>xE000, 0</params></call>
+                    <call><name>SET</name><params>xE000, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>toggle(x000F, 0)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>TOGGLE</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x000F, 0</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x000E</answer>
+                <calls>
+                    <call><name>ISSET</name><params>x000F, 0</params></call>
+                    <call><name>CLEAR</name><params>x000F, 0</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>toggle(x0F00, 8)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>TOGGLE</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x0F00, 8</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x0E00</answer>
+                <calls>
+                    <call><name>ISSET</name><params>x0F00, 8</params></call>
+                    <call><name>CLEAR</name><params>x0F00, 8</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>toggle(x3333, 2)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>TOGGLE</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>x3333, 2</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>x3337</answer>
+                <calls>
+                    <call><name>ISSET</name><params>x3333, 2</params></call>
+                    <call><name>SET</name><params>x3333, 2</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+    <test-case>
+        <name>toggle(xDFFF, 13)</name>
+        <has-max-executions>1</has-max-executions>
+        <max-executions>1000000</max-executions>
+        <randomize>1</randomize>
+        <input>
+            <test-subr>
+                <name>TOGGLE</name>
+                <stack>xF000</stack>
+                <r5>xCAFE</r5>
+                <r7>x8000</r7>
+                <params>xDFFF, 13</params>
+            </test-subr>
+        </input>
+        <output>
+            <test-subr>
+                <answer>xFFFF</answer>
+                <calls>
+                    <call><name>ISSET</name><params>xDFFF, 13</params></call>
+                    <call><name>SET</name><params>xDFFF, 13</params></call>
+                </calls>
+                <points>
+                    <answer>1</answer>
+                    <params>1</params>
+                    <r7>1</r7>
+                    <r6>1</r6>
+                    <r5>1</r5>
+                    <calls>1</calls>
+                    <read-answer>1</read-answer>
+                </points>
+                <deductions-per-mistake>1</deductions-per-mistake>
+            </test-subr>
+        </output>
+    </test-case>
+</test-suite>
