@@ -1,0 +1,178 @@
+<test-suite>
+    <test-case>
+      <name>strcmp('hello world', 'hello world')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>hello world</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>hello world</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>0</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('woo cs2110', 'woo cs2110')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>woo cs2110</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>woo cs2110</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>0</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('bats', 'cats')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>bats</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>cats</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>-1</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('dart', 'cart')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>dart</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>cart</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>1</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('Bats', 'bats')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>Bats</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>bats</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>-1</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('bat', 'ban')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>bat</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>ban</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>1</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('canada', 'canAda')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>canada</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>canAda</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>1</value>
+        </test-value>
+      </output>
+    </test-case>
+    <test-case>
+      <name>strcmp('camp', 'cane')</name>
+      <has-max-executions>1</has-max-executions>
+      <max-executions>1000000</max-executions>
+      <randomize>1</randomize>
+      <input>
+         <test-string>
+          <address>STR1</address>
+          <value>camp</value>
+        </test-string>
+        <test-string>
+          <address>STR2</address>
+          <value>cane</value>
+        </test-string>
+      </input>
+      <output>
+        <test-value condition='equals' points = '10'>
+          <address>ANS</address>
+          <value>-1</value>
+        </test-value>
+      </output>
+    </test-case>
+</test-suite>
