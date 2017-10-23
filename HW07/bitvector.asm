@@ -1,7 +1,7 @@
 ;;==================================
 ;; CS 2110 Spring 2017
 ;; Homework 7 - Functions & Recursion
-;; Name:
+;; Name: Jingbo Wang
 ;;===================================
 
 .orig x3000
