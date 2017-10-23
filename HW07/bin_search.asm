@@ -1,7 +1,7 @@
 ;;===============================
 ;; CS 2110 Fall 2017
 ;; Homework 7 - Functions & Recursion
-;; Name:Jingbo Wang
+;; Name: Jingbo Wang
 ;;===============================
 
 ; DO NOT REMOVE THIS LINE
