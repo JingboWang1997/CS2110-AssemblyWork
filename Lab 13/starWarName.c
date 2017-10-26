@@ -20,4 +20,6 @@ int main(int argc, const char* argv[])
 	scanf("%s", city);
 
 	printf("Star War Name: %c%c%c%c%c %c%c%c%c%c\n", firstname[0], firstname[1], firstname[2], lastname[0], lastname[1], maidenname[0], maidenname[1], city[0], city[1], city[2]);
+
+	return 0;
 }
