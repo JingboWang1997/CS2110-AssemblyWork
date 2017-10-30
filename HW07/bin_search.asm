@@ -63,24 +63,24 @@ STACK       		.fill xF000
 
 .orig x5000
 BIN_SEARCH
-	;stack frame
+;stack frame
 	ADD R6, R6, -3 ; Allocate space for core stack frame (RV, RA, OldFP)
 	STR R7, R6, 1  ; Save the Return Address
 	STR R5, R6, 0  ; Save old FP
 	ADD R5, R6, -1 ; Set new FP
-	;save registers
+;save registers
 	ADD R6, R6, -5  ; Make space to save R0-R4
     	STR R0, R5, 0   ; Save R0 as 1st local
     	STR R1, R5, -1  ; Save R1 as 2nd local
 	STR R2, R5, -2  ; Save R2 as 3rd local
 	STR R3, R5, -3  ; Save R3 as 4th local
 	STR R4, R5, -4  ; Save R4 as 5th local
-	;get args off the stack
+;get args off the stack
 	LDR R0, R5, #4 ;R0 stores ARR
 	LDR R1, R5, #5 ;R1 stores TARGET
 	LDR R2, R5, #6 ;R2 stores START
 	LDR R3, R5, #7 ;R3 stores END
-	;operation
+;operation
 	NOT R4, R3	;
 	ADD R4, R4, 1	;R4 = -END
 	ADD R4, R2, R4	;R4 = START - END
@@ -131,16 +131,16 @@ SECOND	LDR R1, R5, 7   ;R1 stores END
 NOTFOUND
 	AND R0, R0, 0
 	ADD R0, R0, -1
-	;save result in RV
+;save result in RV
 LAST	STR R0, R5, #3 ;store answer into return value
-	;restore register
+;restore register
 	LDR R0, R5, 0  ;load R0 back
 	LDR R1, R5, -1 ;load R1 back
 	LDR R2, R5, -2 ;load R2 back
 	LDR R3, R5, -3 ;load R3 back
 	LDR R4, R5, -4 ;load R4 back
 	ADD R6, R6, 5 ;tear down the top
-	;tear down the rest
+;tear down the rest
 	LDR R7, R5, 2  ; Restore return address
 	ADD R6, R5, 1  ; Move SP to old FP
    	LDR R5, R5, 1  ; Resore old FP
