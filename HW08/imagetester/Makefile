@@ -13,12 +13,12 @@ PROGNAME = drawimage
 # that will be compiled into your program. For example
 # if you have main.c and myLib.c then in the following
 # line you would put main.o and myLib.o
-OFILES = drawimage.o diddy.o main.o
+OFILES = drawimage.o smwabridged.o main.o
 
 # The header files you have created.
 # This is necessary to determine when to recompile for files.
 # This should be a space (SPACE!) separated list of .h files
-HFILES = diddy.h
+HFILES = smwabridged.h
 
 ################################################################################
 # These are various settings used to make the GBA toolchain work

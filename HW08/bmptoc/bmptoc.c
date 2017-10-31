@@ -1,5 +1,5 @@
 // bmptoc.c
-// Name: YOUR NAME HERE
+// Name: Jingbo Wang
 
 #include <stdio.h>
 #include <string.h>
@@ -19,6 +19,7 @@ void writeCFile(char* h_filename, char* bmp_contents, unsigned int width, unsign
 void readBMPFile(char* bmp_filename, char* bmp_contents);
 
 int main(int argc, char *argv[]) {
+    printf("here");
 // ========================================================
     // 1. Make sure the user passed in the correct number of arguments
     // Hint: You'll want to see what value argc has.
@@ -71,11 +72,11 @@ int main(int argc, char *argv[]) {
     // Set the character right after the '.' to 'c'
     // so diddy.bmp --> diddy.cmp
     // YOUR CODE HERE
-
+    c_filename[bmp_filename_len - 3] = 'c';
     // Add the null terminator right after the 'c'
     // diddy.cmp --> diddy.c
     // YOUR CODE HERE
-
+    c_filename[bmp_filename_len - 2] = 0;
     writeCFile(c_filename, bmp_contents, width, height);
     return 0;
 }
@@ -95,9 +96,10 @@ int main(int argc, char *argv[]) {
 // HINT: this can be done in one line
 unsigned int getWidth(char* bmp_contents) {
     // Silence unused arguments warning, remove this when you write your solution.
-    bmp_contents[0] = bmp_contents[0]; 
+    // bmp_contents[0] = bmp_contents[0]; 
     // YOUR CODE HERE
-    return 0;
+    unsigned int* result = (unsigned int*) (bmp_contents + 0x12);
+    return *result;
 }
 
 // TODO
@@ -106,9 +108,10 @@ unsigned int getWidth(char* bmp_contents) {
 // HINT: this can be done in one line
 unsigned int getHeight(char* bmp_contents) {
     // Silence unused arguments warning, remove this when you write your solution.
-    bmp_contents[0] = bmp_contents[0]; 
+    // bmp_contents[0] = bmp_contents[0]; 
     // YOUR CODE HERE
-    return 0;
+    unsigned int* result = (unsigned int*) (bmp_contents + 0x16);
+    return *result;
 }
 
 void writeHFile(char* h_filename, unsigned int width, unsigned int height) {
@@ -172,7 +175,10 @@ void writeCFile(char* c_filename, char* bmp_contents, unsigned int width, unsign
     // 1. Open the file
     // YOUR CODE HERE
 // ========================================================
-
+    FILE* c_file = fopen(c_filename, "w");
+    if (c_file == NULL) {
+        printf("Error creating file %s: %s\n", c_filename, strerror(errno));
+    }
     // 2. You must output the first part of the C file which will look like the
     // line above. Note that instead of 15000 you will have the width * height.
     // Hint: Look at how fprintf is used elsewhere in this code and read the
@@ -182,7 +188,11 @@ void writeCFile(char* c_filename, char* bmp_contents, unsigned int width, unsign
     // Get just the basename portion of the c file.
     // Example: diddy.c --> diddy
     // YOUR CODE HERE
-
+    char basename[100];
+    strcpy(basename, c_filename);
+    int basename_len = strlen(c_filename) - 2;
+    basename[basename_len] = 0;
+    fprintf(c_file, "const unsigned short %s_data[%d] = {\n", basename, width * height);
 // ========================================================
     // 3. Iterate over the pixel data convert it to hex and write the output to the C file.
     // Hint: Pay careful attention to the format of the BMP file. It is stored
@@ -192,10 +202,25 @@ void writeCFile(char* c_filename, char* bmp_contents, unsigned int width, unsign
     // bmp_contents - array of bytes that contains all the data in the bmp file
     // height/width - self explanatory, just so you're aware they're there
     // YOUR CODE HERE
+    unsigned int* bmp = (unsigned int*) (bmp_contents + 0x36);
+    for (int i = height - 1; i >= 0; i--) {
+        for (unsigned int j = 0; j < width; j++) {
+            unsigned int bmpItem = *(bmp + i * width + j);
+        
+            unsigned char bmpRed = bmpItem >> 16;
+            unsigned char bmpGreen = bmpItem >> 8;
+            unsigned char bmpBlue = bmpItem;
+
+            fprintf(c_file, "0x%x, ", bmpRed >> 3 | (bmpGreen >> 3) << 5 | (bmpBlue >> 3) << 10);
+        }
+        fprintf(c_file, "\n");
+    }
 // ========================================================
     // 4. Finally write the closing brace and semicolon to the file and
     // close the file.
     // YOUR CODE HERE
+    fprintf(c_file, "};\n");
+    fclose(c_file);
 }
 
 // Reads the contents of the file bmp_filename into bmp_contents.
