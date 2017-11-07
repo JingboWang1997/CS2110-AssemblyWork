@@ -1,0 +1,58 @@
+
+		.orig x3000
+		ld r6, stkinit
+		ld r5, fpinit
+		ld r0, a
+		ld r1, b
+		add r6, r6, -2	; Allocate space for args
+		str r1, r6, 1	; Put b on stack
+		str r0, r6, 0	; Put a on stack
+		jsr mult
+		ldr r0, r6, 0	; Get result into a reg
+		st r0, c		; Store answer
+		halt
+stkinit	.fill x6000
+fpinit	.fill xbeef
+a		.fill 9
+b		.fill 6
+c 		.fill 0
+	
+mult	add r6, r6, -3	; Space fro RV, RA, OLD FP
+		str r7, r6, 1	; Store Ret Adr
+		str r5, r6, 0	; Store old FP
+		add r6, r6, -1	; Move sp to fp position
+		add r5, r6, 0	; Establish FP
+		add r6, r6, -2	; Make space for a totla of 3 regs
+		str r1, R6, 2	; Save R1, R2 and R3
+		str r2, r6, 1
+		str r3, r6, 0		
+		; Now ready to perform subroutine
+		ldr r1, r5, 5	; Get y
+		brn error
+		brp recurse
+		str r1, r5, 3	; Set return value to zero
+done	ldr r1, r5, 0	; Restoring R1, R2, R3
+		ldr r2, r5, -1
+		ldr r3, r5, -2
+		add r6, r5, 0	; Move SP to FP
+		ldr r5, r6, 1	; Restore OLD FP
+		add r6, r6, 2	; Point at RA
+		ldr r7, r6, 0	; Restore ret addr
+		add r6, r6, 1	; Point sp at ret value
+		ret
+recurse ldr r1, r5, 5	; Get value of y
+		add r1, r1, -1	; Cal y-1
+		add r6, r6, -1	; Alloc space on stack for 1st parameter
+		str r1, r6, 0	; Put 1st para on stack
+		ldr r1, r5, 4	; get x
+		add r6, r6, -1	; Alloc space on stack for last para
+		str r1, r6, 0	; Put last para on stack
+		jsr mult
+xxxx	ldr r1, r6, 0	; Put result of call into a reg
+		ldr r2, r5, 4	; Get x
+		add r3, r1, r2	; Calculate answer x+mult(x,y-1)
+		str r3, r5, 3	; Put result in ret val slot
+		br done		
+stkinit .fill stackend		
+stack	.blkw 1000
+stkend	.fill 0		

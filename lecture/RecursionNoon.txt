@@ -1,0 +1,54 @@
+		.orig x3000
+		ld r6, stkinit
+		ld r5, fpinit
+		ld r0, a
+		ld r1, b
+		add r6, r6, -2
+		str r1, r6, 1		; Store b onto stk
+		str r0, r6, 0		; store a onto stk
+		jsr mult
+		ldr r2, r6, 0		; get ret val
+		st r2, c
+		halt
+a		.fill 7
+b		.fill 8
+c		.fill 0
+stkinit .fill x6000
+fpinit	.fill xbeef		
+
+mult	add r6, r6, -3		; RV, RA, Old FP
+		str r7, r6, 1		; Store RetAdr
+		str r5, r6, 0		; Store old fp
+		add r6, r6, -1		; Space for temps/sr
+		add r5, r6, 0		; Establish FP
+		add r6, r6, -2		; Allocate space for 3 regs
+		str r1, r6, 2		; Save R1
+		str r2, r6, 1		; Save R2
+		str r3, r6, 0		; Save R3
+		; Now we will execute the subroutine proper
+		ldr r1, r5, 5		; get y
+		brn error
+		brp recurse
+		str r1, r5, 3		; Put 0 in return value
+done	ldr r1, r5, 0		; Restore R1
+		ldr r2, r5, -1		; Restore R2
+		ldr r3, r5, -2		; Restore R3
+		add r6, r5, 1		; Make SP point at old FP 
+		ldr r5, r6, 0		; Restore FP
+		add R6, R6, 1		; Point at RA
+		ldr R7, R6, 0		; Restore RA
+		add R6, R6, 1		; Point SP at RV
+		ret
+recurse	ldr r1, r5, 5		; Get y
+		add r1, r1, -1		; Cal y-1
+		add r6, r6, -1		; Make space on stack
+		str r1, r6, 0
+		ldr r1, r5, 4		; Get x
+		add r6, r6, -1		; Make space on stack
+		str r1, r6, 0		; Store x on stack
+		jsr mult			; Call mult
+		ldr r1, r6, 0		; Put result in R1
+		ldr r2, r5, 4		; Get x
+		add r3, r1, r2		; This is the answer!
+		str r3, r5, 3		; Store in Retval
+		br done
