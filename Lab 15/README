@@ -1,0 +1,95 @@
+=====================
+|      Part 1       |
+=====================
+
+Read through the provided code before running it.
+	Q: What does the code do?
+	A: it builds up a stack as tall as max_calls
+
+Now compile the code with
+
+	gcc inspect_memory.c -o inspect_memory -Wall -Werror -Wextra -std=c99
+
+and run the code with
+
+	./inspect_memory
+
+
+=====================
+|      Part 2       |
+=====================
+
+Memory is divided into 4 regions:
+	1: Code
+	2: Static
+	3: Stack
+	4: Heap
+
+You will learn about the heap later, but for now let's inspect the first 3 
+regions:
+	1: Code
+	2: Static
+	3: Stack
+
+Using the tool from part 1 fill out the following table
+
+===============================================
+| Memory region | Approximate address          |
+===============================================
+| Code          | ---------------------------  |
+| Static        | ---------------------------  |
+| Stack         | ---------------------------  |
+================================================
+
+=====================
+|      Part 3       |
+=====================
+
+Q: From the recursive function calls figure out the size of a single stack frame 
+created by the print_my_stack() function. 
+A: 
+
+Q: What is the difference between the global variables a and b?
+A: 
+
+Q: Based on the addresses of the globals "a" and "b" and the static variable 
+"d" inside print_my_stack(), why do you think that the creators of C decided 
+to use the "static" keyword in both situations?
+A:
+
+=====================
+|      Part 4       |
+=====================
+
+Explain how you would use the following keywords in the context of a GBA game:
+
+Static: the value is stored in the static area and te value stays the same after changing
+
+Volatile: the value will be accessed by some outside operation
+
+Const: the value cannot be changed, read-only
+
+Extern: the variable is declared somewhere else
+
+Q: Why don't we ever write the "auto" keyword?
+A: this is implicitly added to a local variable declaration
+
+Q: Why don't we still use the "register" keyword?
+A: the compiler can achieve the optimazion better
+
+
+There are 3 contexts that the "static" keyword can be used in:
+	1: On a global variable: 
+	2: On a function: 
+	3: On a local variable: 
+
+Explain what the difference is in all 3 of these contexts and give an example:
+
+Global variable
+private variable to this file only
+
+Function
+private function to this file only
+
+Local variable
+static value, keeps the value when changed
