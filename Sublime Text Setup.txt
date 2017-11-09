@@ -1,0 +1,27 @@
+To set up Sublime Text:
+	In Sublime -> Tools -> Build System -> Create new Build System
+	Copy and paste the code below and save the new build system.
+
+	Sublime should then be able to build and run a GBA project.
+	Open up main.c in Sublime to test it out.
+
+
+	
+{
+    "cmd": ["make", "build"],
+    "variants":
+    [
+        {
+            "name": "Run",
+            "cmd": ["make", "run"]
+        },
+        {
+            "name": "Clean",
+            "cmd": ["make", "clean"]
+        },
+        {
+            "name": "All",
+            "cmd": ["make", "all"]
+        }
+    ]
+}

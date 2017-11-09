@@ -1,0 +1,195 @@
+=============
+Introduction
+=============
+
+DMA is fantastic at copying contiguous data like images or swaths of color and you should strive to
+utilize it wherever you can to improve performance.
+
+=============
+Goal
+=============
+
+Get experience with DMA by refactoring all major functions in myLib.c to use DMA instead of
+setPixel. You should be able to delete the setPixel from the code without errors once you are done.
+
+================
+Life without DMA
+================
+
+If you wanted to copy an array of shorts without DMA you could write something like:
+
+unsigned short data[100] = ...
+unsigned short copy[100];
+for (int i = 0; i < 100; i++) {
+    copy[i] = data[i];
+}
+
+If you were to compile this to LC3 assembly it would look something like:
+
+.orig x3000
+    LD R0, DATA
+    LD R1, DATA_LEN
+    LD R4, COPY
+    ADD R1, R1, -1 ; Start at len - 1
+LOOP
+    ADD R1, R1, 0
+    BRn DONE
+    ADD R2, R0, R1 ; DATA + OFFSET
+    LDR R3, R2, 0  ; data[i]
+    ADD R5, R4, R1 ; COPY + OFFSET
+    STR R3, R5, 0  ; copy[i] = data[i]
+    ADD R1, R1, -1
+    BR LOOP
+DONE
+    HALT
+DATA_LEN
+    .fill 100
+DATA
+    .fill x3100    ; Address of our data
+COPY
+    .fill x3200    ; Address of our copy
+
+This would execute this loop 100 times forcing the hardware to run all 8 instructions in the loop
+each time.
+
+=============
+DMA overview
+=============
+
+DMA (direct memory access) is dedicated hardware that is specialized at copying memory from one
+place to another. This allows us to move large blocks of data from one location to another much
+more quickly than with a loop. Moreover, since DMA is done using another device, it frees up the
+processor to do other operations.
+
+The GBA has several DMA controllers, and you can interact with them by setting values at
+specific memory addresses.
+
+The first controller reserves 96 bits of space for its values, and this space starts at
+address 0x040000B0. The space is partitioned in the following way:
+
+===========================================================================================
+|                                 DMA_Controller                                          |
+===========================================================================================
+|          0 - 31         |          32 - 63          |              64 - 95              |
+-------------------------------------------------------------------------------------------
+|      source pointer     |    destination pointer    |        additional settings        |
+===========================================================================================
+
+The source pointer describes what address the DMA should copy from
+The destination pointer describes what address DMA should copy the data to
+The 32 bits for additional settings are divided into these sections:
+
+===========================================================================================
+|                              Additional Settings                                        |
+===========================================================================================
+|       Bit Range         |      Name       |                  Options                    |
+===========================================================================================
+|        00 - 20          | # Items to copy |               21 bit number                 |
+-------------------------------------------------------------------------------------------
+|        21 - 22          |   Dest Update   |     Increment, decrement, or fixed          |
+-------------------------------------------------------------------------------------------
+|        23 - 24          |   Src Update    |     Increment, decrement, or fixed          |
+-------------------------------------------------------------------------------------------
+|        25 - 30          |   Miscellanae   |     Don't worry about these things          |
+-------------------------------------------------------------------------------------------
+|        31               |     DMA On      |     0 or 1; 1 will turn DMA on              |
+===========================================================================================
+
+When DMA is turned on, it will start copying until it is done.
+
+There are also 4 different DMA units (0-3), the rest of the controllers are mapped directly after
+the first one.
+
+This set of controllers is easily usable through a set of macros that have been defined for you.
+
+typedef struct
+{
+    const volatile void *src;
+    const volatile void *dst;
+    u32                  cnt; // This is Additional Settings
+} DMA_CONTROLLER;
+
+#define DMA ((volatile DMA_CONTROLLER *) 0x040000B0)
+
+This DMA macro defines a pointer to the array of 4 DMA_CONTROLLERs.
+
+=============
+Using DMA
+=============
+
+We use DMA[3] because it is a common convention, but you could just as easily use 0, 1, or 2.
+To use DMA to replace our earlier example:
+
+// Set the source
+DMA[3].src = &data;
+
+// Set the destination
+DMA[3].dst = &copy;
+
+// Set our additional options in the controller (cnt)
+DMA[3].cnt = 100 | DMA_SOURCE_INCREMENT | DMA_DESTINATION_INCREMENT | DMA_ON
+
+====================================
+Explaining what goes into DMA[3].cnt
+====================================
+
+100 is the number of shorts to copy
+
+DMA_SOURCE_INCREMENT tells DMA to first get data from *data, then *(data + 1), then *(data + 2) ...
+    - If we used DMA_SOURCE_FIXED this would get all the data from *data
+        - This can be useful if you just want to copy 1 color over and over.
+    - If we used DMA_SOURCE_DECREMENT this would get data from *data, then *(data - 1),
+    then *(data-2)...
+        - This can be useful for flipping images Left-Right
+
+DMA_DESTINATION_INCREMENT is just like DMA_SOURCE_INCREMENT but it is applied to the destination.
+
+DMA_ON tells the DMA to actually run, you always want this. If you do not set this bit, then the
+DMA controller will never start copying.
+
+==============
+The assignment
+==============
+
+Now it is time to try using DMA for yourself.
+
+Run the code by executing:
+
+make vba
+
+We have provided you with code that draws a splash screen in 4 parts, one in
+each corner. Like this:
+
+                                +--+--+
+                                |q1|q2|
+                                +--+--+
+                                |q3|q4|
+                                +--+--+
+
+Two of these parts (Q1 and Q4) are normal images.
+Q2 is flipped left-right
+Q3 is flipped up-down
+
+The code we have given you draws these correctly, but uses setPixel and is slow. Our goal is to
+replace all of the setPixel code with DMA calls to speed up the program.
+
+ALL OF THE FOLLOWING FUNCTIONS SHOULD ONLY HAVE 1 FOR LOOP WHEN YOU ARE DONE.
+    - Remember that DMA is only good at copying a CONTIGUOUS block of memory to
+    another CONTIGUOUS block of memory.
+
+1) Refactor drawRedRectangle in myLib.c to use DMA rather than setPixel.
+    [HINT]: Think about using DMA_SRC_FIXED.
+    [HINT]: DMA needs the source to be a pointer so you CAN NOT USE DMA[3].src = RED;
+2) Test that this works
+3) Refactor drawImage to use DMA rather than setPixel
+    [HINT]: This is just like the example above.
+4) Test that this works
+5) Refactor drawImageFlippedLR with DMA
+    [HINT]: Think about using DMA_SOURCE_DECREMENT or DMA_DESTINATION_DECREMENT
+6) Refactor drawImageFlippedUD with DMA
+    [HINT]: Up-down should just require you to change the order of your for loop from part 3.
+7) Make sure everything still works
+8) Delete setPixel in both myLib.h and myLib.c
+9) Test to make sure that your code still works
+10) Show a TA your code
+
