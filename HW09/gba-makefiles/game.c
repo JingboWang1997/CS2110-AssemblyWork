@@ -50,7 +50,7 @@ int main()
 				OBJECT player;
 				player.row = 5;
 				player.col = 5;
-				player.size = 10;
+				player.size = 25;
 				player.oldrow = 5;
 				player.oldcol = 5;
 				player.rdel = 2;
@@ -60,7 +60,7 @@ int main()
 				OBJECT enemy1;
 				enemy1.row = 5;
 				enemy1.col = 230;
-				enemy1.size = 40;
+				enemy1.size = 35;
 				enemy1.oldrow = 5;
 				enemy1.oldcol = 230;
 				enemy1.rdel = 1;
@@ -70,7 +70,7 @@ int main()
 				OBJECT enemy2;
 				enemy2.row = 140;
 				enemy2.col = 230;
-				enemy2.size = 30;
+				enemy2.size = 25;
 				enemy2.oldrow = 140;
 				enemy2.oldcol = 230;
 				enemy2.rdel = 2;
@@ -80,7 +80,7 @@ int main()
 				OBJECT speed;
 				speed.row = 50;
 				speed.col = 50;
-				speed.size = 5;
+				speed.size = 15;
 				speed.oldrow = 50;
 				speed.oldcol = 50;
 				speed.rdel = -1;
