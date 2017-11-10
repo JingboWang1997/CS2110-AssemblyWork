@@ -9,7 +9,7 @@ int main()
 
 	enum GBAState state = START;
 	int released = 0;
-	u16 bgcolor = DKGRAY;
+	u16 bgcolor = WHITE;
 	int score = 0;
 	int scoreTimer = 0;
 	int foodTimer = 0;
@@ -50,7 +50,7 @@ int main()
 				OBJECT player;
 				player.row = 5;
 				player.col = 5;
-				player.size = 5;
+				player.size = 10;
 				player.oldrow = 5;
 				player.oldcol = 5;
 				player.rdel = 2;
@@ -120,9 +120,9 @@ int main()
 				if(KEY_DOWN_NOW(BUTTON_RIGHT))
 				{
 					player.col = player.col + player.cdel;
-					if(player.col >= 230 - player.size)
+					if(player.col >= 240 - player.size)
 					{
-						player.col = 230 - player.size;
+						player.col = 240 - player.size;
 					}
 					scoreTimer++;
 				}
@@ -131,7 +131,7 @@ int main()
 				//track if the player in high-speed mode or normal mode
 				if (speed.flag) 
 				{
-					drawRect(player.row, player.col, player.size, player.size, WHITE);
+					drawRect(player.row, player.col, player.size, player.size, DKGRAY);
 				}
 				else
 				{
@@ -148,28 +148,23 @@ int main()
 				{
 					enemy1.row = 0;
 					enemy1.rdel = -enemy1.rdel;
-					scoreTimer++;
 				}
 				if(enemy1.row >= 140-enemy1.size)
 				{
 					enemy1.row = 140-enemy1.size;
 					enemy1.rdel = -enemy1.rdel;
-					scoreTimer++;
 				}
 				if(enemy1.col <= 0)
 				{
 					enemy1.col = 0;
 					enemy1.cdel = -enemy1.cdel;
-					scoreTimer++;
 				}
-				if(enemy1.col >= 230-enemy1.size)
+				if(enemy1.col >= 240-enemy1.size)
 				{
-					enemy1.col = 230-enemy1.size;
+					enemy1.col = 240-enemy1.size;
 					enemy1.cdel = -enemy1.cdel;
-					scoreTimer++;
 				}
 				drawRect(enemy1.oldrow, enemy1.oldcol, enemy1.size, enemy1.size, bgcolor);
-				//drawRect(enemy1.row, enemy1.col, enemy1.size, enemy1.size, BLACK);
 				drawImage(enemy1.row, enemy1.col, ENEMY1_WIDTH, ENEMY1_HEIGHT, enemy1Image);
 				enemy1.oldrow = enemy1.row;
 				enemy1.oldcol = enemy1.col;
@@ -181,28 +176,24 @@ int main()
 				{
 					enemy2.row = 0;
 					enemy2.rdel = -enemy2.rdel;
-					scoreTimer++;
 				}
 				if(enemy2.row >= 140-enemy2.size)
 				{
 					enemy2.row = 140-enemy2.size;
 					enemy2.rdel = -enemy2.rdel;
-					scoreTimer++;
 				}
 				if(enemy2.col <= 0)
 				{
 					enemy2.col = 0;
 					enemy2.cdel = -enemy2.cdel;
-					scoreTimer++;
 				}
-				if(enemy2.col >= 230-enemy2.size)
+				if(enemy2.col >= 240-enemy2.size)
 				{
-					enemy2.col = 230-enemy2.size;
+					enemy2.col = 240-enemy2.size;
 					enemy2.cdel = -enemy2.cdel;
-					scoreTimer++;
 				}
 				drawRect(enemy2.oldrow, enemy2.oldcol, enemy2.size, enemy2.size, bgcolor);
-				drawRect(enemy2.row, enemy2.col, enemy2.size, enemy2.size, BLACK);
+				drawImage(enemy2.row, enemy2.col, ENEMY2_WIDTH, ENEMY2_HEIGHT, enemy2Image);
 				enemy2.oldrow = enemy2.row;
 				enemy2.oldcol = enemy2.col;
 
@@ -226,13 +217,13 @@ int main()
 						speed.col = 0;
 						speed.cdel = -speed.cdel;
 					}
-					if(speed.col >= 230-speed.size)
+					if(speed.col >= 240-speed.size)
 					{
-						speed.col = 230-speed.size;
+						speed.col = 240-speed.size;
 						speed.cdel = -speed.cdel;
 					}
 					drawRect(speed.oldrow, speed.oldcol, speed.size, speed.size, bgcolor);
-					drawRect(speed.row, speed.col, speed.size, speed.size, BLUE);
+					drawImage(speed.row, speed.col, FOOD_WIDTH, FOOD_HEIGHT, food);
 					speed.oldrow = speed.row;
 					speed.oldcol = speed.col;
 
@@ -253,20 +244,25 @@ int main()
 				}
 
 				//score update
+				drawRect(140, 0, 1, 240, RED);
 				drawRect(150, 5, 10, 70, bgcolor);
 				sprintf(buffer, "Score: %d", score);
-				drawString(150, 5, buffer, YELLOW);
+				drawString(150, 5, buffer, RED);
 
 				//speed-mode timer
-				if (scoreTimer >= 50) 
+				if (scoreTimer >= 80) //for each 80 pixels it moved
 				{
 					scoreTimer = 0;
 					score++;
 					if (!speed.flag)
 					{
+						drawRect(150, 140, 10, 70, bgcolor);
+						sprintf(buffer, "Speed Timer: %d", 11-foodTimer-1);
+						drawString(150, 120, buffer, BLUE);
 						foodTimer++;
-						if (foodTimer >= 20)
+						if (foodTimer >= 11)
 						{
+							drawRect(150, 120, 10, 100, bgcolor);
 							foodTimer = 0;
 							speed.flag = 1;
 							player.rdel--;

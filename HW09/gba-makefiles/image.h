@@ -41,7 +41,7 @@ extern const unsigned short start[38400];
 #define START_WIDTH 240
 #define START_HEIGHT 160
 
-extern const unsigned short foodImage[25];
+extern const unsigned short food[25];
 #define FOOD_SIZE 50
 #define FOOD_LENGTH 25
 #define FOOD_WIDTH 5

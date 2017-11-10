@@ -1,15 +1,15 @@
 /*
  * Exported with nin10kit v1.7
  * Invocation command was nin10kit --mode=3 image end.jpg enemy1.jpg enemy2.jpg start.jpg food.png 
- * Time-stamp: Thursday 11/09/2017, 12:38:03
+ * Time-stamp: Friday 11/10/2017, 00:15:35
  * 
  * Image Information
  * -----------------
  * end.jpg 1280@720
- * enemy1.jpg 800@600
- * enemy2.jpg 800@600
- * start.jpg 1280@720
- * food.png 104@104
+ * enemy1.jpg 40@40
+ * enemy2.jpg 30@30
+ * start.jpg 240@160
+ * food.png 5@5
  * 
  * All bug reports / feature requests are to be filed here https://github.com/TricksterGuy/nin10kit/issues
  */
@@ -17,11 +17,11 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-extern const unsigned short end[38400];
-#define END_SIZE 76800
-#define END_LENGTH 38400
-#define END_WIDTH 240
-#define END_HEIGHT 160
+extern const unsigned short end[921600];
+#define END_SIZE 1843200
+#define END_LENGTH 921600
+#define END_WIDTH 1280
+#define END_HEIGHT 720
 
 extern const unsigned short enemy1[1600];
 #define ENEMY1_SIZE 3200
