@@ -18,7 +18,7 @@ OFILES = font.o game.o myLib.o text.o image.o
 # The header files you have created.
 # This is necessary to determine when to recompile for files.
 # This should be a space (SPACE!) separated list of .h files
-HFILES = myLib.h
+HFILES = myLib.h image.h text.h 
 
 ################################################################################
 # These are various settings used to make the GBA toolchain work

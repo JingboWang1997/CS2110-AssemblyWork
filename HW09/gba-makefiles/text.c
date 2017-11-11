@@ -10,7 +10,7 @@ void drawChar(int row, int col, char ch, unsigned short color)
 			if (fontdata_6x8[OFFSET(r, c, 6) + ch*48] == 1)
 			{
 				DMA[3].src = &color;
-        		DMA[3].dst = &videoBuffer[OFFSET(row+r, col+c, 240)];
+        		DMA[3].dst = &videoBuffer[OFFSET(row+r, col+c, 240)]; 
         		DMA[3].cnt = 1 | DMA_SOURCE_FIXED | DMA_DESTINATION_FIXED | DMA_ON;
 			}
 		}

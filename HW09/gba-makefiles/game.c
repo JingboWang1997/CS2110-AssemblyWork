@@ -22,7 +22,7 @@ int main()
 			case START:
 				//start screen
 		        drawImage(0, 0, START_WIDTH, START_HEIGHT, start);
-				drawString(140, 5, "Press Z to START", BLUE);
+				drawString(150, 5, "Press A to START", WHITE);
 				state = START_NODRAW;
 				break;
 			case START_NODRAW:
@@ -56,6 +56,7 @@ int main()
 				player.rdel = 2;
 				player.cdel = 2;
 				player.flag = 1;
+				player.image = playerImage;
 
 				OBJECT enemy1;
 				enemy1.row = 0;
@@ -66,6 +67,7 @@ int main()
 				enemy1.rdel = 1;
 				enemy1.cdel = 1;
 				enemy1.flag = 1;
+				enemy1.image = enemy1Image;
 
 				OBJECT enemy2;
 				enemy2.row = 115;
@@ -76,6 +78,7 @@ int main()
 				enemy2.rdel = 2;
 				enemy2.cdel = 2;
 				enemy2.flag = 1;
+				enemy2.image = enemy2Image;
 
 				OBJECT speed;
 				speed.row = 50;
@@ -86,6 +89,7 @@ int main()
 				speed.rdel = -1;
 				speed.cdel = -1;
 				speed.flag = 1;
+				speed.image = food;
 
 				break;
 			case GAME:
@@ -156,30 +160,15 @@ int main()
 				}
 				//erase the old one
 				drawRect(player.oldrow, player.oldcol, player.size, player.size, bgcolor);
-				//drawing status (high-speed mode/normal mode)
-				if (speed.flag) 
+				//direction of movement change image
+				if (player.cdel > 0)
 				{
-					//direction of movement
-					if (player.cdel > 0)
-					{
-						drawImageRL(player.row, player.col, PLAYER_WIDTH, PLAYER_HEIGHT, playerImage);
-					}
-					else
-					{
-						drawImage(player.row, player.col, PLAYER_WIDTH, PLAYER_HEIGHT, playerImage);
-					}
+					drawImageRL(player.row, player.col, player.size, player.size, player.image);
 				}
 				else
-				{	if (player.cdel > 0)
-					{
-						drawImageRL(player.row, player.col, PLAYER2_WIDTH, PLAYER2_HEIGHT, player2Image);
-					}
-					else
-					{
-						drawImage(player.row, player.col, PLAYER2_WIDTH, PLAYER2_HEIGHT, player2Image);
-					}
+				{
+					drawImage(player.row, player.col, player.size, player.size, player.image);
 				}
-				//update player location
 				player.oldrow = player.row;
 				player.oldcol = player.col;
 
@@ -207,7 +196,7 @@ int main()
 					enemy1.cdel = -enemy1.cdel;
 				}
 				drawRect(enemy1.oldrow, enemy1.oldcol, enemy1.size, enemy1.size, bgcolor);
-				drawImage(enemy1.row, enemy1.col, ENEMY1_WIDTH, ENEMY1_HEIGHT, enemy1Image);
+				drawImage(enemy1.row, enemy1.col, enemy1.size, enemy1.size, enemy1.image);
 				enemy1.oldrow = enemy1.row;
 				enemy1.oldcol = enemy1.col;
 
@@ -235,7 +224,7 @@ int main()
 					enemy2.cdel = -enemy2.cdel;
 				}
 				drawRect(enemy2.oldrow, enemy2.oldcol, enemy2.size, enemy2.size, bgcolor);
-				drawImage(enemy2.row, enemy2.col, ENEMY2_WIDTH, ENEMY2_HEIGHT, enemy2Image);
+				drawImage(enemy2.row, enemy2.col, enemy2.size, enemy2.size, enemy2.image);
 				//drawRect(enemy2.row, enemy2.col, enemy2.size, enemy2.size, RED);
 				enemy2.oldrow = enemy2.row;
 				enemy2.oldcol = enemy2.col;
@@ -266,7 +255,7 @@ int main()
 						speed.cdel = -speed.cdel;
 					}
 					drawRect(speed.oldrow, speed.oldcol, speed.size, speed.size, bgcolor);
-					drawImage(speed.row, speed.col, FOOD_WIDTH, FOOD_HEIGHT, food);
+					drawImage(speed.row, speed.col, speed.size, speed.size, speed.image);
 					speed.oldrow = speed.row;
 					speed.oldcol = speed.col;
 
@@ -290,17 +279,19 @@ int main()
 						}
 						speed.flag = 0;
 						foodTimer = 0;
+						player.image = player2Image;
 						drawRect(speed.row, speed.col, speed.size, speed.size, bgcolor);
 					}
 				}
 				else
 				{
-					drawRect(150, 150, 10, 70, bgcolor);
+					drawRect(150, 165, 10, 70, bgcolor);
 					sprintf(buffer, "Speed Timer: %d", 5-foodTimer);
-					drawString(150, 130, buffer, BLUE);
+					drawString(150, 145, buffer, BLUE);
 					if (foodTimer > 5)
 					{
-						drawRect(150, 130, 10, 90, bgcolor);
+						drawRect(150, 145, 10, 90, bgcolor);
+						player.image = playerImage;
 						speed.flag = 1;
 						if (player.rdel > 0) 
 						{
@@ -353,19 +344,17 @@ int main()
 				}
 
 				//key interuption listener
-				if (KEY_DOWN_NOW(BUTTON_A) && released) 
+				if (KEY_DOWN_NOW(BUTTON_SELECT))
 				{
 					state = START;
-					released = 0;
 				}
-				waitForVblank();
 				break;
 			case END:
 				//end screen
 		        drawImage(0, 0, END_WIDTH, END_HEIGHT, end);
 				sprintf(buffer, "Your score is: %d", score);
 				drawString(100, 70, buffer, YELLOW);
-				drawString(10, 10, "Press Z to EXIT", BLUE);
+				drawString(150, 10, "Press A or SELETE to EXIT", WHITE);
 				state = END_NODRAW;
 
 			case END_NODRAW:
@@ -380,7 +369,12 @@ int main()
 					state = START;
 					released = 0;
 				}
+				if (KEY_DOWN_NOW(BUTTON_SELECT))
+				{
+					state = START;
+				}
 				break;
 		}
+	waitForVblank();
 	}
 }

@@ -40,6 +40,7 @@ typedef unsigned short u16;
 
 #define BUTTONS *(volatile unsigned int *)0x4000130
 
+// DMA
 typedef struct
 {
 	const volatile void *src;
@@ -49,7 +50,6 @@ typedef struct
 
 #define DMA ((volatile DMA_CONTROLLER *) 0x040000B0)
 
-// Defines
 #define DMA_CHANNEL_0 0
 #define DMA_CHANNEL_1 1
 #define DMA_CHANNEL_2 2
@@ -89,6 +89,7 @@ typedef struct
 	int oldrow;
 	int oldcol;
 	int flag;
+	const u16* image; 
 } OBJECT;
 
 enum GBAState {
@@ -107,3 +108,4 @@ void waitForVblank();
 int collide(OBJECT obj1, OBJECT obj2);
 void drawImage(int row, int col, int width, int height, const u16* image);
 void drawImageRL(int row, int col, int width, int height, const u16* image);
+

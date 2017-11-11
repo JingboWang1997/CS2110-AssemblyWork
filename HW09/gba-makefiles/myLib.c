@@ -4,7 +4,7 @@ unsigned short *videoBuffer = (unsigned short *)0x6000000;
 
 int collide(OBJECT obj1, OBJECT obj2) 
 {
-	if (obj1.row >= obj2.row-obj1.size && obj1.row <= obj2.row+obj2.size && obj1.col >= obj2.col-obj1.size && obj1.col <= obj2.col+obj2.size)
+	if (obj1.row >= obj2.row-obj1.size+2 && obj1.row <= obj2.row+obj2.size-2 && obj1.col >= obj2.col-obj1.size+2 && obj1.col <= obj2.col+obj2.size-2)
 	{
 		//top edge
 		return 1;
