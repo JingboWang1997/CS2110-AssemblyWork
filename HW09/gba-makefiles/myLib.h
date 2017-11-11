@@ -106,3 +106,4 @@ void delay(int n);
 void waitForVblank();
 int collide(OBJECT obj1, OBJECT obj2);
 void drawImage(int row, int col, int width, int height, const u16* image);
+void drawImageRL(int row, int col, int width, int height, const u16* image);

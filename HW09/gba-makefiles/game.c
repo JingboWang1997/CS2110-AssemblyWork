@@ -58,21 +58,21 @@ int main()
 				player.flag = 1;
 
 				OBJECT enemy1;
-				enemy1.row = 5;
-				enemy1.col = 230;
+				enemy1.row = 0;
+				enemy1.col = 205;
 				enemy1.size = 35;
-				enemy1.oldrow = 5;
-				enemy1.oldcol = 230;
+				enemy1.oldrow = 0;
+				enemy1.oldcol = 205;
 				enemy1.rdel = 1;
 				enemy1.cdel = 1;
 				enemy1.flag = 1;
 
 				OBJECT enemy2;
-				enemy2.row = 140;
-				enemy2.col = 230;
+				enemy2.row = 115;
+				enemy2.col = 215;
 				enemy2.size = 25;
-				enemy2.oldrow = 140;
-				enemy2.oldcol = 230;
+				enemy2.oldrow = 115;
+				enemy2.oldcol = 215;
 				enemy2.rdel = 2;
 				enemy2.cdel = 2;
 				enemy2.flag = 1;
@@ -92,50 +92,92 @@ int main()
 				//operations
 				if(KEY_DOWN_NOW(BUTTON_UP))
 				{
-					player.row = player.row - player.rdel;
+					if (player.rdel > 0) 
+					{
+						player.rdel = -player.rdel;
+					}
+					player.row = player.row + player.rdel;
 					if(player.row <= 0)
 					{
 						player.row = 0;
 					}
-					scoreTimer++;
+					else
+					{
+						scoreTimer++;
+					}
 				}
 				if(KEY_DOWN_NOW(BUTTON_DOWN))
 				{
+					if (player.rdel < 0) 
+					{
+						player.rdel = -player.rdel;
+					}
 					player.row = player.row + player.rdel;
 					if(player.row >= 140 - player.size)
 					{
 						player.row = 140 - player.size;
 					}
-					scoreTimer++;
+					else
+					{
+						scoreTimer++;
+					}
 				}
 				if(KEY_DOWN_NOW(BUTTON_LEFT))
 				{
-					player.col = player.col - player.cdel;
+					if (player.cdel > 0) 
+					{
+						player.cdel = -player.cdel;
+					}
+					player.col = player.col + player.cdel;
 					if(player.col <= 0)
 					{
 						player.col = 0;
 					}
-					scoreTimer++;
+					else
+					{
+						scoreTimer++;
+					}
 				}
 				if(KEY_DOWN_NOW(BUTTON_RIGHT))
 				{
+					if (player.cdel < 0) 
+					{
+						player.cdel = -player.cdel;
+					}
 					player.col = player.col + player.cdel;
 					if(player.col >= 240 - player.size)
 					{
 						player.col = 240 - player.size;
 					}
-					scoreTimer++;
+					else
+					{
+						scoreTimer++;
+					}
 				}
 				//erase the old one
 				drawRect(player.oldrow, player.oldcol, player.size, player.size, bgcolor);
-				//track if the player in high-speed mode or normal mode
+				//drawing status (high-speed mode/normal mode)
 				if (speed.flag) 
 				{
-					drawRect(player.row, player.col, player.size, player.size, DKGRAY);
+					//direction of movement
+					if (player.cdel > 0)
+					{
+						drawImageRL(player.row, player.col, PLAYER_WIDTH, PLAYER_HEIGHT, playerImage);
+					}
+					else
+					{
+						drawImage(player.row, player.col, PLAYER_WIDTH, PLAYER_HEIGHT, playerImage);
+					}
 				}
 				else
-				{
-					drawRect(player.row, player.col, player.size, player.size, BLUE);
+				{	if (player.cdel > 0)
+					{
+						drawImageRL(player.row, player.col, PLAYER2_WIDTH, PLAYER2_HEIGHT, player2Image);
+					}
+					else
+					{
+						drawImage(player.row, player.col, PLAYER2_WIDTH, PLAYER2_HEIGHT, player2Image);
+					}
 				}
 				//update player location
 				player.oldrow = player.row;
@@ -194,6 +236,7 @@ int main()
 				}
 				drawRect(enemy2.oldrow, enemy2.oldcol, enemy2.size, enemy2.size, bgcolor);
 				drawImage(enemy2.row, enemy2.col, ENEMY2_WIDTH, ENEMY2_HEIGHT, enemy2Image);
+				//drawRect(enemy2.row, enemy2.col, enemy2.size, enemy2.size, RED);
 				enemy2.oldrow = enemy2.row;
 				enemy2.oldcol = enemy2.col;
 
@@ -229,12 +272,54 @@ int main()
 
 					if (collide(player, speed))
 					{
-						player.rdel++;
-						player.cdel++;
-
+						if (player.rdel > 0) 
+						{
+							player.rdel++;
+						}
+						else
+						{
+							player.rdel--;
+						}
+						if (player.cdel > 0) 
+						{
+							player.cdel++;
+						}
+						else
+						{
+							player.cdel--;
+						}
 						speed.flag = 0;
+						foodTimer = 0;
 						drawRect(speed.row, speed.col, speed.size, speed.size, bgcolor);
 					}
+				}
+				else
+				{
+					drawRect(150, 150, 10, 70, bgcolor);
+					sprintf(buffer, "Speed Timer: %d", 5-foodTimer);
+					drawString(150, 130, buffer, BLUE);
+					if (foodTimer > 5)
+					{
+						drawRect(150, 130, 10, 90, bgcolor);
+						speed.flag = 1;
+						if (player.rdel > 0) 
+						{
+							player.rdel--;
+						}
+						else
+						{
+							player.rdel++;
+						}
+						if (player.cdel > 0) 
+						{
+							player.cdel--;
+						}
+						else
+						{
+							player.cdel++;
+						}
+					}
+
 				}
 
 				//collision listener
@@ -256,18 +341,8 @@ int main()
 					score++;
 					if (!speed.flag)
 					{
-						drawRect(150, 140, 10, 70, bgcolor);
-						sprintf(buffer, "Speed Timer: %d", 11-foodTimer-1);
-						drawString(150, 120, buffer, BLUE);
 						foodTimer++;
-						if (foodTimer >= 11)
-						{
-							drawRect(150, 120, 10, 100, bgcolor);
-							foodTimer = 0;
-							speed.flag = 1;
-							player.rdel--;
-							player.cdel--;
-						}
+						
 					}
 				}
 

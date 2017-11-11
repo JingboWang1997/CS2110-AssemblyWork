@@ -38,10 +38,20 @@ void waitForVblank()
 	while(SCANLINECOUNTER < 160);
 }
 
-void drawImage(int row, int col, int width, int height, const u16* image) {
+void drawImage(int row, int col, int width, int height, const u16* image) 
+{
     for (int r = 0; r < height; r++) {
         DMA[3].src = &image[r * width];
         DMA[3].dst = &videoBuffer[OFFSET(row+r, col, 240)];
         DMA[3].cnt = width | DMA_SOURCE_INCREMENT | DMA_DESTINATION_INCREMENT | DMA_ON;
+    }
+}
+
+void drawImageRL(int row, int col, int width, int height, const u16* image) 
+{
+	for (int r = 0; r < height; r++) {
+        DMA[3].src = &image[((r+1) * width) - 1];
+        DMA[3].dst = &videoBuffer[OFFSET(row+r, col, 240)];
+        DMA[3].cnt = width | DMA_SOURCE_DECREMENT | DMA_DESTINATION_INCREMENT | DMA_ON;
     }
 }
