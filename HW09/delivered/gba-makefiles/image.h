@@ -61,11 +61,5 @@ extern const unsigned short start[38400];
 #define START_WIDTH 240
 #define START_HEIGHT 160
 
-extern const unsigned short bombImage[625];
-#define BOMB_SIZE 1250
-#define BOMB_LENGTH 625
-#define BOMB_WIDTH 25
-#define BOMB_HEIGHT 25
-
 #endif
 

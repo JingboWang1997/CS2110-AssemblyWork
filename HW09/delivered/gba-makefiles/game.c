@@ -8,8 +8,7 @@ int main()
 	REG_DISPCTL = MODE3 | BG2_ENABLE;
 
 	enum GBAState state = START;
-	int releasedA = 0;
-	int releasedB = 0;
+	int released = 0;
 	u16 bgcolor = WHITE;
 	int score = 0;
 	int scoreTimer = 0;
@@ -23,8 +22,7 @@ int main()
 			case START:
 				//start screen
 		        drawImage(0, 0, START_WIDTH, START_HEIGHT, start);
-		        drawString(140, 5, "Press A to Dodge Mode", WHITE);
-				drawString(150, 5, "Press B to Bomb Mode", WHITE);
+				drawString(150, 5, "Press A to START", WHITE);
 				state = START_NODRAW;
 				break;
 			case START_NODRAW:
@@ -32,28 +30,19 @@ int main()
 				state = START_NODRAW;
 				if (!KEY_DOWN_NOW(BUTTON_A)) 
 				{
-					releasedA = 1;
+					released = 1;
 				}
-				if (KEY_DOWN_NOW(BUTTON_A) && releasedA) 
+				if (KEY_DOWN_NOW(BUTTON_A) && released) 
 				{
-					state = GAME1_SETUP;
-					releasedA = 0;
-				}
-				if (!KEY_DOWN_NOW(BUTTON_B)) 
-				{
-					releasedB = 1;
-				}
-				if (KEY_DOWN_NOW(BUTTON_B) && releasedB) 
-				{
-					state = GAME2_SETUP;
-					releasedB = 0;
+					state = GAME_SETUP;
+					released = 0;
 				}
 				break;
-			case GAME1_SETUP:
+			case GAME_SETUP:
 				//initialize the game screen and objects
 		        drawRect(0, 0, 160, 240, bgcolor);
 
-				state = GAME1;
+				state = GAME;
 				score = 0;
 				scoreTimer = 0;
 				foodTimer = 0;
@@ -103,7 +92,7 @@ int main()
 				speed.image = food;
 
 				break;
-			case GAME1:
+			case GAME:
 				//operations
 				if(KEY_DOWN_NOW(BUTTON_UP))
 				{
@@ -348,209 +337,10 @@ int main()
 					}
 				}
 
-				//key interuption listener
-				if (KEY_DOWN_NOW(BUTTON_SELECT))
-				{
-					state = START;
-				}
-				break;
-			case GAME2_SETUP:
-				//initialize the game screen and objects
-		        drawRect(0, 0, 160, 240, bgcolor);
-
-				state = GAME2;
-
-				OBJECT player2;
-				player2.row = 5;
-				player2.col = 5;
-				player2.size = 25;
-				player2.oldrow = 5;
-				player2.oldcol = 5;
-				player2.rdel = 2;
-				player2.cdel = 2;
-				player2.flag = 1;
-				player2.image = playerImage;
-
-				OBJECT enemy1_1;
-				enemy1_1.row = 0;
-				enemy1_1.col = 205;
-				enemy1_1.size = 35;
-				enemy1_1.oldrow = 0;
-				enemy1_1.oldcol = 205;
-				enemy1_1.rdel = 1;
-				enemy1_1.cdel = 1;
-				enemy1_1.flag = 1;
-				enemy1_1.image = enemy1Image;
-
-				OBJECT enemy2_2;
-				enemy2_2.row = 115;
-				enemy2_2.col = 215;
-				enemy2_2.size = 25;
-				enemy2_2.oldrow = 115;
-				enemy2_2.oldcol = 215;
-				enemy2_2.rdel = 2;
-				enemy2_2.cdel = 2;
-				enemy2_2.flag = 1;
-				enemy2_2.image = enemy2Image;
-
-				OBJECT bomb;
-				bomb.row = 0;
-				bomb.col = 0;
-				bomb.size = 25;
-				bomb.oldrow = 0;
-				bomb.oldcol = 0;
-				bomb.rdel = 0;
-				bomb.cdel = 0;
-				bomb.flag = 0;
-				bomb.image = bombImage;
-
-				break;
-			case GAME2:
-				//operations
-				if(KEY_DOWN_NOW(BUTTON_UP))
-				{
-					if (player2.rdel > 0) 
-					{
-						player2.rdel = -player2.rdel;
-					}
-					player2.row = player2.row + player2.rdel;
-					if(player2.row <= 0)
-					{
-						player2.row = 0;
-					}
-				}
-				if(KEY_DOWN_NOW(BUTTON_DOWN))
-				{
-					if (player2.rdel < 0) 
-					{
-						player2.rdel = -player2.rdel;
-					}
-					player2.row = player2.row + player2.rdel;
-					if(player2.row >= 140 - player2.size)
-					{
-						player2.row = 140 - player2.size;
-					}
-				}
-				if(KEY_DOWN_NOW(BUTTON_LEFT))
-				{
-					if (player2.cdel > 0) 
-					{
-						player2.cdel = -player2.cdel;
-					}
-					player2.col = player2.col + player2.cdel;
-					if(player2.col <= 0)
-					{
-						player2.col = 0;
-					}
-				}
-				if(KEY_DOWN_NOW(BUTTON_RIGHT))
-				{
-					if (player2.cdel < 0) 
-					{
-						player2.cdel = -player2.cdel;
-					}
-					player2.col = player2.col + player2.cdel;
-					if(player2.col >= 240 - player2.size)
-					{
-						player2.col = 240 - player2.size;
-					}
-				}
-				//erase the old one
-				drawRect(player2.oldrow, player2.oldcol, player2.size, player2.size, bgcolor);
-				//direction of movement change image
-				if (player2.cdel > 0)
-				{
-					drawImageRL(player2.row, player2.col, player2.size, player2.size, player2.image);
-				}
-				else
-				{
-					drawImage(player2.row, player2.col, player2.size, player2.size, player2.image);
-				}
-				player2.oldrow = player2.row;
-				player2.oldcol = player2.col;
-
-				//enemy1 movement
-				enemy1_1.row = enemy1_1.row + enemy1_1.rdel;
-				enemy1_1.col = enemy1_1.col + enemy1_1.cdel;
-				if(enemy1_1.row <= 0)
-				{
-					enemy1_1.row = 0;
-					enemy1_1.rdel = -enemy1_1.rdel;
-				}
-				if(enemy1_1.row >= 140-enemy1_1.size)
-				{
-					enemy1_1.row = 140-enemy1_1.size;
-					enemy1_1.rdel = -enemy1_1.rdel;
-				}
-				if(enemy1_1.col <= 0)
-				{
-					enemy1_1.col = 0;
-					enemy1_1.cdel = -enemy1_1.cdel;
-				}
-				if(enemy1_1.col >= 240-enemy1_1.size)
-				{
-					enemy1_1.col = 240-enemy1_1.size;
-					enemy1_1.cdel = -enemy1_1.cdel;
-				}
-				drawRect(enemy1_1.oldrow, enemy1_1.oldcol, enemy1_1.size, enemy1_1.size, bgcolor);
-				drawImage(enemy1_1.row, enemy1_1.col, enemy1_1.size, enemy1_1.size, enemy1_1.image);
-				enemy1_1.oldrow = enemy1_1.row;
-				enemy1_1.oldcol = enemy1_1.col;
-
-				//enemy2 movement
-				enemy2_2.row = enemy2_2.row + enemy2_2.rdel;
-				enemy2_2.col = enemy2_2.col - enemy2_2.cdel;
-				if(enemy2_2.row <= 0)
-				{
-					enemy2_2.row = 0;
-					enemy2_2.rdel = -enemy2_2.rdel;
-				}
-				if(enemy2_2.row >= 140-enemy2_2.size)
-				{
-					enemy2_2.row = 140-enemy2_2.size;
-					enemy2_2.rdel = -enemy2_2.rdel;
-				}
-				if(enemy2_2.col <= 0)
-				{
-					enemy2_2.col = 0;
-					enemy2_2.cdel = -enemy2_2.cdel;
-				}
-				if(enemy2_2.col >= 240-enemy2_2.size)
-				{
-					enemy2_2.col = 240-enemy2_2.size;
-					enemy2_2.cdel = -enemy2_2.cdel;
-				}
-				drawRect(enemy2_2.oldrow, enemy2_2.oldcol, enemy2_2.size, enemy2_2.size, bgcolor);
-				drawImage(enemy2_2.row, enemy2_2.col, enemy2_2.size, enemy2_2.size, enemy2_2.image);
-				//drawRect(enemy2.row, enemy2.col, enemy2.size, enemy2.size, RED);
-				enemy2_2.oldrow = enemy2_2.row;
-				enemy2_2.oldcol = enemy2_2.col;
-
-				if (bomb.flag)
-				{
-					drawImage(bomb.row, bomb.col, bomb.size, bomb.size, bomb.image);
-				}
-
-				if (KEY_DOWN_NOW(BUTTON_A))
-				{
-					if (!bomb.flag)
-					{
-						bomb.row = player2.row;
-						bomb.col = player2.col;
-						bomb.flag = 1;
-					}
-				}
-
-				//collision listener
-				if (collide(player2, enemy1_1) || collide(player2, enemy2_2)) 
-				{
-					state = END;
-				}
-
 				//key release listener
-				if (!KEY_DOWN_NOW(BUTTON_B)) 
+				if (!KEY_DOWN_NOW(BUTTON_A)) 
 				{
-					releasedB = 1;
+					released = 1;
 				}
 
 				//key interuption listener
@@ -570,15 +360,15 @@ int main()
 			case END_NODRAW:
 				//maintain end screen
 				state = END_NODRAW;
-				// if (!KEY_DOWN_NOW(BUTTON_A)) 
-				// {
-				// 	releasedA = 1;
-				// }
-				// if (KEY_DOWN_NOW(BUTTON_A) && releasedA) 
-				// {
-				// 	state = START;
-				// 	releasedA = 0;
-				// }
+				if (!KEY_DOWN_NOW(BUTTON_A)) 
+				{
+					released = 1;
+				}
+				if (KEY_DOWN_NOW(BUTTON_A) && released) 
+				{
+					state = START;
+					released = 0;
+				}
 				if (KEY_DOWN_NOW(BUTTON_SELECT))
 				{
 					state = START;
