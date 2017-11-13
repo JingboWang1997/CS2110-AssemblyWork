@@ -10,6 +10,8 @@ For every 80 pixel units the player travels, the time-unit will increment by 1 t
 
 OPERATION:
 
+Press 'A' ('Z') to proceed from title screen to the game screen, and press 'A' ('Z') to go from the game over screen to the title screen. Pressing 'SELECT' ('DELETE') anytime can go to the title screen
+
 During the game, the up, down, left and right arrow will control the squirtle to go in the corresponding direction. The SELECT (DELETE) key will exit the game back to the title page at any time.
 
 

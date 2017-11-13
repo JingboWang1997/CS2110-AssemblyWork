@@ -95,8 +95,10 @@ typedef struct
 enum GBAState {
 	START,
 	START_NODRAW,
-	GAME_SETUP,
-	GAME,
+	GAME1_SETUP,
+	GAME1,
+	GAME2_SETUP,
+	GAME2,
 	END,
 	END_NODRAW
 };

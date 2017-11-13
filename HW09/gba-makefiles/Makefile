@@ -1,13 +1,13 @@
 ################################################################################
 # These are variables for the GBA toolchain build
 # You can add others if you wish to
-# ***** YOUR NAME HERE *****
+# ***** Jingbo Wang *****
 ################################################################################
 
 # The name of your desired GBA game
 # This should be a just a name i.e MyFirstGBAGame
 # No SPACES AFTER THE NAME.
-PROGNAME = game
+PROGNAME = Survive
 
 # Here you must put a list of all of the object files
 # that will be compiled into your program. For example
