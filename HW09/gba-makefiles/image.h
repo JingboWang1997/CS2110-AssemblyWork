@@ -67,5 +67,11 @@ extern const unsigned short bombImage[625];
 #define BOMB_WIDTH 25
 #define BOMB_HEIGHT 25
 
+extern const unsigned short fireImage[625];
+#define FIRE_SIZE 1250
+#define FIRE_LENGTH 625
+#define FIRE_WIDTH 25
+#define FIRE_HEIGHT 25
+
 #endif
 

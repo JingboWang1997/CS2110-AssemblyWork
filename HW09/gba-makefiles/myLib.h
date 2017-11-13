@@ -100,6 +100,8 @@ enum GBAState {
 	GAME2_SETUP,
 	GAME2,
 	END,
+	END2,
+	SUCCESS2,
 	END_NODRAW
 };
 
