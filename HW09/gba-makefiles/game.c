@@ -356,8 +356,8 @@ int main()
 				break;
 			case GAME2_SETUP:
 				//initialize the game screen and objects
-			 	drawRect(0, 0, 160, 240, BLACK);
-		        drawRect(0, 25, 160, 200, bgcolor);
+			 	// drawRect(0, 0, 160, 240, BLACK);
+		        drawRect(0, 0, 160, 240, bgcolor);
 
 				state = GAME2;
 
@@ -375,7 +375,7 @@ int main()
 				player2.image = player2Image;
 
 				OBJECT enemy1_1;
-				enemy1_1.row = 0;
+				enemy1_1.row = 30;
 				enemy1_1.col = 190;
 				enemy1_1.size = 35;
 				enemy1_1.oldrow = 0;
@@ -386,7 +386,7 @@ int main()
 				enemy1_1.image = enemy1Image;
 
 				OBJECT enemy2_2;
-				enemy2_2.row = 135;
+				enemy2_2.row = 30;
 				enemy2_2.col = 200;
 				enemy2_2.size = 25;
 				enemy2_2.oldrow = 135;
@@ -491,9 +491,9 @@ int main()
 						player2.cdel = -player2.cdel;
 					}
 					player2.col = player2.col + player2.cdel;
-					if(player2.col <= 25)
+					if(player2.col <= 0)
 					{
-						player2.col = 25;
+						player2.col = 0;
 					}
 				}
 				if(KEY_DOWN_NOW(BUTTON_RIGHT))
@@ -503,9 +503,9 @@ int main()
 						player2.cdel = -player2.cdel;
 					}
 					player2.col = player2.col + player2.cdel;
-					if(player2.col >= 225 - player2.size)
+					if(player2.col >= 240 - player2.size)
 					{
-						player2.col = 225 - player2.size;
+						player2.col = 240 - player2.size;
 					}
 				}
 				//erase the old one
@@ -537,14 +537,14 @@ int main()
 						enemy1_1.row = 160-enemy1_1.size;
 						enemy1_1.rdel = -enemy1_1.rdel;
 					}
-					if(enemy1_1.col <= 25)
+					if(enemy1_1.col <= 0)
 					{
-						enemy1_1.col = 25;
+						enemy1_1.col = 0;
 						enemy1_1.cdel = -enemy1_1.cdel;
 					}
-					if(enemy1_1.col >= 225-enemy1_1.size)
+					if(enemy1_1.col >= 240-enemy1_1.size)
 					{
-						enemy1_1.col = 225-enemy1_1.size;
+						enemy1_1.col = 240-enemy1_1.size;
 						enemy1_1.cdel = -enemy1_1.cdel;
 					}
 					drawRect(enemy1_1.oldrow, enemy1_1.oldcol, enemy1_1.size, enemy1_1.size, bgcolor);
@@ -569,14 +569,14 @@ int main()
 						enemy2_2.row = 160-enemy2_2.size;
 						enemy2_2.rdel = -enemy2_2.rdel;
 					}
-					if(enemy2_2.col <= 25)
+					if(enemy2_2.col <= 0)
 					{
-						enemy2_2.col = 25;
+						enemy2_2.col = 0;
 						enemy2_2.cdel = -enemy2_2.cdel;
 					}
-					if(enemy2_2.col >= 225-enemy2_2.size)
+					if(enemy2_2.col >= 240-enemy2_2.size)
 					{
-						enemy2_2.col = 225-enemy2_2.size;
+						enemy2_2.col = 240-enemy2_2.size;
 						enemy2_2.cdel = -enemy2_2.cdel;
 					}
 					drawRect(enemy2_2.oldrow, enemy2_2.oldcol, enemy2_2.size, enemy2_2.size, bgcolor);
@@ -611,17 +611,40 @@ int main()
 
 				if (fire1.flag)
 				{
-					drawImage(fire1.row, fire1.col, fire1.size, fire1.size, fire1.image);
-					drawImage(fire2.row, fire2.col, fire2.size, fire2.size, fire2.image);
-					if (fire2.col < 25)
+					if (fire1.row < 0 && fire1.row > -fire1.size)
 					{
-						drawRect(fire2.row, fire2.col, fire1.size, 25-fire2.col, BLACK);
+						drawImage(0, fire1.col, fire1.size, fire1.size+fire1.row, fire1.image);
 					}
-					drawImage(fire3.row, fire3.col, fire3.size, fire3.size, fire3.image);
-					drawImage(fire4.row, fire4.col, fire4.size, fire4.size, fire4.image);
-					if (fire4.col+fire4.size > 225)
+					else if (fire1.row >= 0)
 					{
-						drawRect(fire4.row, 225, fire4.size, fire4.col+fire4.size-225, BLACK);
+						drawImage(fire1.row, fire1.col, fire1.size, fire1.size, fire1.image);
+					}
+
+					if (fire2.col < 0 && fire2.col > -fire2.size)
+					{
+						drawImage(fire2.row, 0, fire2.size+fire2.col, fire2.size, fire2.image);
+					}
+					else if (fire2.col >= 0)
+					{
+						drawImage(fire2.row, fire2.col, fire2.size, fire2.size, fire2.image);
+					}
+
+					if (fire3.row+fire3.size > 160 && fire3.row < 160)
+					{
+						drawImage(fire3.row, fire3.col, fire3.size, fire3.size-(fire3.row+fire3.size-160), fire3.image);
+					}
+					else if (fire3.row+fire3.size <= 160)
+					{
+						drawImage(fire3.row, fire3.col, fire3.size, fire3.size, fire3.image);
+					}
+
+					if (fire4.col+fire4.size > 240 && fire4.col < 240)
+					{
+						drawImage(fire4.row, fire4.col, fire4.size-(fire4.col+fire4.size-240), fire4.size, fire4.image);
+					}
+					else if (fire4.col+fire4.size <= 240)
+					{
+						drawImage(fire4.row, fire4.col, fire4.size, fire4.size, fire4.image);
 					}
 
 				}
@@ -657,24 +680,47 @@ int main()
 					fire4.flag = 0;
 
 					drawRect(bomb.row, bomb.col, bomb.size, bomb.size, bgcolor);
-					drawRect(fire1.row, fire1.col, fire1.size, fire1.size, bgcolor);
-					drawRect(fire2.row, fire2.col, fire2.size, fire2.size, bgcolor);
-					if (fire2.col < 25)
+					if (fire1.row < 0 && fire1.row > -fire1.size)
 					{
-						drawRect(fire2.row, fire2.col, fire1.size, 25-fire2.col, BLACK);
+						drawRect(0, fire1.col, fire1.size+fire1.row, fire1.size, bgcolor);
 					}
-					drawRect(fire3.row, fire3.col, fire3.size, fire3.size, bgcolor);
-					drawRect(fire4.row, fire4.col, fire4.size, fire4.size, bgcolor);
-					if (fire4.col+fire4.size > 225)
+					else if (fire1.row >= 0)
 					{
-						drawRect(fire4.row, 225, fire4.size, fire4.col+fire4.size-225, BLACK);
+						drawRect(fire1.row, fire1.col, fire1.size, fire1.size, bgcolor);
+					}
+
+					if (fire2.col < 0 && fire2.col > -fire2.size)
+					{
+						drawRect(fire2.row, 0, fire2.size, fire2.size+fire2.col, bgcolor);
+					}
+					else if (fire2.col >= 0)
+					{
+						drawRect(fire2.row, fire2.col, fire2.size, fire2.size, bgcolor);
+					}
+
+					if (fire3.row+fire3.size > 160 && fire3.row < 160)
+					{
+						drawRect(fire3.row, fire3.col, fire3.size-(fire3.row+fire3.size-160), fire3.size, bgcolor);
+					}
+					else if (fire3.row+fire3.size <= 160)
+					{
+						drawRect(fire3.row, fire3.col, fire3.size, fire3.size, bgcolor);
+					}
+
+					if (fire4.col+fire4.size > 240 && fire4.col < 240)
+					{
+						drawRect(fire4.row, fire4.col, fire4.size, fire4.size-(fire4.col+fire4.size-240), bgcolor);
+					}
+					else if (fire4.col+fire4.size <= 240)
+					{
+						drawRect(fire4.row, fire4.col, fire4.size, fire4.size, bgcolor);
 					}
 
 				}
 
 				if (KEY_DOWN_NOW(BUTTON_A))
 				{
-					if (!bomb.flag && player2.row >= 0 && player2.row <= 160 && player2.col - 10 >= 0 && player2.row + 15 <= 240)
+					if (!bomb.flag && player2.row >= 0 && player2.row <= 160 && player2.col >= 0 && player2.row <= 240)
 					{
 						bomb.row = player2.row;
 						bomb.col = player2.col;
