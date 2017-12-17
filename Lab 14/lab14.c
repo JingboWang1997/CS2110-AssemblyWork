@@ -33,6 +33,11 @@ int main()
 	drawRectangle(20, 20, 20, 20, WHITE);
 	drawHollowRectangle(40, 40, 20, 20, GREEN);
 
+	// for (unsigned int i = 0; i < sizeof(void *); i++)
+	// {
+	// 	setPixel(i + i, i + i, RED);
+	// }
+
 	while(1);
 }
 

@@ -1,0 +1,13 @@
+[{"test_name":"test_create_list", "test_passed":true, "test_total":10, "test_score":10},
+{"test_name":"test_create_list_fail_second", "test_passed":true, "test_total":5, "test_score":5},
+{"test_name":"test_create_list_fail_first", "test_passed":true, "test_total":5, "test_score":5},
+{"test_name":"test_add_null", "test_passed":true, "test_total":5, "test_score":5},
+{"test_name":"test_add_9", "test_passed":true, "test_total":7, "test_score":7},
+{"test_name":"test_add_10", "test_passed":true, "test_total":7, "test_score":7},
+{"test_name":"test_add_11", "test_passed":false, "test_total":7, "test_score":0},
+{"test_name":"test_add_11_fail", "test_passed":false, "test_total":7, "test_score":0},
+{"test_name":"test_add_20", "test_passed":false, "test_total":7, "test_score":0},
+{"test_name":"test_shallow_copy", "test_passed":false, "test_total":10, "test_score":0},
+{"test_name":"test_shallow_copy_fail", "test_passed":false, "test_total":10, "test_score":0},
+{"test_name":"test_destroy", "test_passed":true, "test_total":20, "test_score":20}
+]

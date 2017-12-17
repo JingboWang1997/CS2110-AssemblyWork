@@ -190,6 +190,7 @@ list *deep_copy_list(list *listToCopy, list_copy copyFunc, list_op freeFunc)
     }
     if (!push_back(ptr, newData))
     {
+      freeFunc(newData); //hw possible problem?
       flag = 1;
       break;
     }
