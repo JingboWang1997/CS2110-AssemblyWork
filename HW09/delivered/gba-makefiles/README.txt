@@ -1,3 +1,9 @@
+TO RUN on linux:
+open terminal
+run "sudo apt install visualboyadvance"
+run "vba Survive.gba"
+game window will pop up
+
 GAME_INTRODUCTION:
 
 This game has two modes: doge-mode and bomb-mode
@@ -20,16 +26,16 @@ bomb-mode:
 
 OPERATION:
 
-Press 'A' ('Z') to proceed from title screen to the dodge-mode game screen.
-Press 'B' ('X') to proceed from title screen to the bomb-mode game screen.
-Press 'SELECT' ('DELETE') to go from the game over screen to the title screen. 
-Press 'SELECT' ('DELETE') anytime can go to the title screen
+Press 'A'(gameboy) ('Z'(laptop)) to proceed from title screen to the dodge-mode game screen.
+Press 'B'(gameboy) ('X'(laptop)) to proceed from title screen to the bomb-mode game screen.
+Press 'SELECT'(gameboy) ('DELETE'(laptop)) to go from the game over screen to the title screen. 
+Press 'SELECT'(gameboy) ('DELETE'(laptop)) anytime can go to the title screen
 
 dodge-mode:
 	During the game, the up, down, left and right arrow will control the squirtle to go in the corresponding direction.
 
 bomb-mode:
-	During the game, the button 'A' ('Z') will put a bomb on the screen
+	During the game, the button 'A'(gameboy) ('Z'(laptop)) will put a bomb on the screen
 
 
 GAME_PROGRESS:
